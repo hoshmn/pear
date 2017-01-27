@@ -6,7 +6,7 @@ import {connect, Provider} from 'react-redux'
 
 import store from './store'
 import GroupContainer from './components/GroupContainer'
-import {loadGroup} from './reducers/group'
+import {loadGroup, loadAll} from './reducers/group'
   
 // const ExampleApp = connect(
 //   ({ auth }) => ({ user: auth })
@@ -57,7 +57,7 @@ const group = [
 
 
 const loadGroupOnEnter = () => {
-  store.dispatch(loadGroup(group))
+  store.dispatch(loadAll())
 }
 
 render (

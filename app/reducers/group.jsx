@@ -1,17 +1,34 @@
 import axios from 'axios'
+import { Individual } from 'APP/app/utils'
 
-const initialState = { group: [] }
+const initialState = { group: { title: '', members: [] } }
 
 // const replace = (arr, thiss, thatt) => {
 // 	return arr.map(elm => elm===thiss?thatt:elm);
 // }
 
-// action
-const LOAD_GROUP = 'LOAD_GROUP'
+// actions
+const RECEIVE_GROUP = 'RECEIVE_GROUP'
+
+// const LOAD_ALL = 'LOAD_ALL'
+
 const UPDATE_PREFERENCE = 'UPDATE_PREFERENCE'
 
-// action-generator
-export const loadGroup = group => ({ type: LOAD_GROUP, group }) 
+// action-generators
+export const receiveGroup = group => ({ type: RECEIVE_GROUP, group }) 
+
+export const loadAll = () => dispatch => {
+	axios.get('/api/group/')
+		.then(res => res.data)
+		.then(all => dispatch(receiveGroup({ title: 'ALL', members: all.map(indiv=>new Individual(indiv))})))
+}
+
+export const loadGroup = groupId => dispatch => {
+	axios.get(`/api/group/${groupId}`)
+		.then(res => res.data)
+		.then(members => dispatch(receiveGroup({ title: 'ALL', members: members.map(indiv=>new Individual(indiv))})))
+}
+
 export const updatePreference = (liker, likee, amount) => ({
 	type: UPDATE_PREFERENCE,
 	liker,
@@ -25,7 +42,7 @@ export default (state=initialState, action) => {
 
   switch(action.type) {
 
-  case LOAD_GROUP:
+  case RECEIVE_GROUP:
   	newState.group = action.group
  		break
 

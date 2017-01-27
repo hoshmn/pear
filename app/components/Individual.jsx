@@ -16,7 +16,7 @@ const Individual = ({indiv, selected, select, updatePreference}) => {
 
   const compatabilityColor = colorInterpolator(likedBySelected)
 
-  console.log('etanusteosunt',indiv.name)
+  // console.log('etanusteosunt',indiv.name)
 
   return(
   <span>

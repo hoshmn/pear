@@ -1,31 +1,31 @@
-const group = [
-	{
-		name: 'Josh',
-		Gil: 17,
-		Aditya: 9,
-		Rose: 8
-	},{
-		name: 'Gil',
-		Josh: 27,
-		Aditya: 9,
-		Rose: 8
-	},{
-		name: 'Aditya',
-		Gil: 7,
-		Josh: 9,
-		Rose: 8
-	},{
-		name: 'Rose',
-		Gil: 7,
-		Aditya: 9,
-		Josh: 8
-	},{
-		name: 'Simon',
-		Gil: 7,
-		Aditya: 9,
-		Josh: 8
-	}
-]
+// const group = [
+// 	{
+// 		name: 'Josh',
+// 		Gil: 17,
+// 		Aditya: 9,
+// 		Rose: 8
+// 	},{
+// 		name: 'Gil',
+// 		Josh: 27,
+// 		Aditya: 9,
+// 		Rose: 8
+// 	},{
+// 		name: 'Aditya',
+// 		Gil: 7,
+// 		Josh: 9,
+// 		Rose: 8
+// 	},{
+// 		name: 'Rose',
+// 		Gil: 7,
+// 		Aditya: 9,
+// 		Josh: 8
+// 	},{
+// 		name: 'Simon',
+// 		Gil: 7,
+// 		Aditya: 9,
+// 		Josh: 8
+// 	}
+// ]
 
 const randomEl = arr => arr[Math.floor(Math.random()*arr.length)]
 
@@ -58,4 +58,4 @@ const pear = (group, indiv = randomEl(group)) => {
 	return pairs;
 }
 
-console.log(pear(group))
+// console.log(pear(group))
