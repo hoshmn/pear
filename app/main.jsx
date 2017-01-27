@@ -6,7 +6,7 @@ import {connect, Provider} from 'react-redux'
 
 import store from './store'
 import GroupContainer from './components/GroupContainer'
-import {loadGroup, loadAll} from './reducers/group'
+import { loadGroup, loadAll } from './reducers/individual'
   
 // const ExampleApp = connect(
 //   ({ auth }) => ({ user: auth })

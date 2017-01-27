@@ -3,15 +3,15 @@ import { connect } from 'react-redux'
 
 import Group from './group'
 
-import { selectIndiv } from '../reducers/individual'
-import { updatePreference } from '../reducers/group'
+import { selectIndiv, updatePreference } from '../reducers/individual'
+// import { updatePreference } from '../reducers/group'
 
 
 // import { thunkPupFetcher } from './action-creators'; 
 // console.log(receivePups)
 
 const mapStateToProps = (state, ownProps) => ({
-	group: state.group.group,
+	group: state.indiv.group,
 	selected: state.indiv.selected
 })
 
