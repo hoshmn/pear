@@ -27,6 +27,8 @@
 // 	}
 // ]
 
+//TODO: lodashify
+
 const randomEl = arr => arr[Math.floor(Math.random()*arr.length)]
 
 const pluck = (group, indiv) => {

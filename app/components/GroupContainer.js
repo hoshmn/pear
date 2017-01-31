@@ -11,7 +11,8 @@ import { selectIndiv, updatePreference } from '../reducers/individual'
 // console.log(receivePups)
 
 const mapStateToProps = (state, ownProps) => ({
-	group: state.indiv.group,
+	name: state.indiv.groupName,
+	members: state.indiv.groupMembers,
 	selected: state.indiv.selected
 })
 

@@ -12,19 +12,30 @@ const Individual = db.define('individuals', {
 	//     	as: 'partner'
 	//   			}]
 	// },
+
 	instanceMethods: {
 		setPreference: function (partner, pref){
-			return db.model('individualPartner').findOrCreate({
+			return db.model('individualPartners').findOrCreate({where: 
+				{
 				individual_id: this.id,
 				partner_id: partner.id
+				}	
 			})
 			.spread((indivPart, created) => {
 				indivPart.preference = pref
-				console.log('saving: ', indivPart, pref)
 				return indivPart.save()
 			})
+			//return instance after pref updated
+			.then(() => this)
 		}
 	}
+})
+
+Individual.addScope('withPartners', {
+	include: [{
+		model: Individual, 
+		as: 'partner'
+	}]
 })
 
 

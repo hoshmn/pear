@@ -3,23 +3,30 @@ import { Individual } from 'APP/app/utils'
 
 const initialState = { 
 	selected: {}, 
-	group: { title: '', members: [] }
+	groupName: '', 
+	groupMembers: [] 
 	}
 
 // action
 const SELECT_INDIV = 'SELECT_INDIV'
-const UPDATE_PREFERENCE = 'UPDATE_PREFERENCE'
+const UPDATE_INDIV = 'UPDATE_INDIV'
 const RECEIVE_GROUP = 'RECEIVE_GROUP'
 
 // action-generator
 export const selectIndiv = indiv => ({ type: SELECT_INDIV, indiv }) 
 
-export const updatePreference = (liker, likee, amount) => ({
-	type: UPDATE_PREFERENCE,
-	liker,
-	likee,
-	amount
-})
+export const updateIndiv = (indiv) => ({ type: UPDATE_INDIV, indiv })
+
+export const updatePreference = (liker, likee, amount) => dispatch => {
+	axios.put('api/individual/', {liker, likee, amount})
+		.then(res => res.data)
+		.then(updatedIndiv => dispatch(updateIndiv(new Individual(updatedIndiv))))
+	}
+		// {
+		// 	const formattedIndiv = new Individual(updatedIndiv)
+		// 	dispatch(updatePreference(formattedIndiv, likee, amount))
+		// })
+		// }
 
 export const receiveGroup = group => ({ type: RECEIVE_GROUP, group }) 
 
@@ -46,17 +53,24 @@ export default (state=initialState, action) => {
   		newState.selected = action.indiv
  		break
 
-	case UPDATE_PREFERENCE:
-		const likerCopy = Object.assign({}, action.liker)
-		likerCopy[action.likee.name] = action.amount
- 		newState.selected = likerCopy
+	case UPDATE_INDIV:
+		// const likerCopy = Object.assign({}, action.liker)
+		// likerCopy[action.likee.name] = action.amount
+	 	// 	newState.selected = likerCopy
 
- 		newState.group.members = newState.group.members.map(member=>
- 			likerCopy.id==member.id ? likerCopy : member)
+	 //TODO: lodash replace
+	 	// console.log(action.indiv, '@@@')
+	 	const updatedIndiv = action.indiv
+ 		newState.selected = updatedIndiv
+
+ 		newState.groupMembers = newState.groupMembers.map(member =>
+ 			updatedIndiv.id==member.id ? updatedIndiv : member)
+ 		// console.log(members)
  		break
 
 	case RECEIVE_GROUP:
-	  	newState.group = action.group
+	  	newState.groupName = action.group.title
+	  	newState.groupMembers = action.group.members
 	 	break
 
  	default:

@@ -17,7 +17,7 @@ const Individual = ({indiv, selected, select, updatePreference}) => {
   const compatabilityColor = colorInterpolator(likedBySelected)
 
   // console.log('etanusteosunt',indiv.name)
-  console.log('!!!!!', indiv, selected)
+  // console.log('!!!!!', indiv, selected)
   return(
   <span>
     <img src='http://tiny.cc/664iiy' style={{backgroundColor:compatabilityColor}} onClick={()=>select(indiv)} />

@@ -7,11 +7,7 @@ const Group = require('APP/db/models').Group
 const Individual = require('APP/db/models').Individual
 
 router.get('/', (req, res, next) => {
-	Individual.findAll({include: [{
-		model:Individual,
-		as: 'partner'
-		}]
-	})
+	Individual.scope('withPartners').findAll()
 	.then(indivs => res.json(indivs))
 	.catch(next)
 })

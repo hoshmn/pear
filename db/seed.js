@@ -26,13 +26,12 @@ const randomPreference = () => Math.floor( Math.random()*21 ) - 10
 const seedPreferences = () => db.Promise.map(ids, indivId => 
 	ids.filter(partId => indivId != partId)
 	   	.map(partId => {
-			const pref = randomPreference()
-			console.log(pref)
-			return db.model('individualPartners').create({
-				individual_id: indivId,
-				partner_id: partId,
-				preference: pref
-				})
+  			const pref = randomPreference()
+  			return db.model('individualPartners').create({
+  				individual_id: indivId,
+  				partner_id: partId,
+  				preference: pref
+  				})
 		})
 )
 

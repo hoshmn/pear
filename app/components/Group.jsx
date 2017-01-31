@@ -45,15 +45,16 @@ import SelectedIndividual from './SelectedIndividual';
 //   };
 
 
-export default ({selected, group, select, updatePreference}) => {
+export default ({selected, name, members, select, updatePreference}) => {
   // console.log(group)
   return (
 
       <div>
         <h1>Pears</h1>
+        <h1> {name} </h1>
         <span className="flexbox-container" >
         {  //create PEAR component
-          group.members && group.members.map( indiv => {
+          members && members.map( indiv => {
             // console.log(indiv.name)
             // console.log(this.state.selected.name)
             return (selected === indiv)
