@@ -17,11 +17,24 @@ export const selectIndiv = indiv => ({ type: SELECT_INDIV, indiv })
 
 export const updateIndiv = (indiv) => ({ type: UPDATE_INDIV, indiv })
 
-export const updatePreference = (liker, likee, amount) => dispatch => {
+//optimistic loading
+export const updatePreference = (liker, likee, amount) => {
 	axios.put('api/individual/', {liker, likee, amount})
-		.then(res => res.data)
-		.then(updatedIndiv => dispatch(updateIndiv(new Individual(updatedIndiv))))
-	}
+	const updatedLiker = {...liker}
+	console.log('indiv, =?', updatedLiker === liker)
+	updatedLiker[likee.name] = amount
+	return updateIndiv(updatedLiker)
+}
+
+// export const updatePreference = (liker, likee, amount) => dispatch => {
+// 	axios.put('api/individual/', {liker, likee, amount})
+// 		.then(res => res.data)
+// 		.then(updatedIndiv => {
+// 			const formattedIndiv = new Individual(updatedIndiv)
+// 			formattedIndiv[likee.name] = amount
+// 			dispatch(updateIndiv(formattedIndiv))
+// 		})
+// 	}
 		// {
 		// 	const formattedIndiv = new Individual(updatedIndiv)
 		// 	dispatch(updatePreference(formattedIndiv, likee, amount))
@@ -51,7 +64,7 @@ export const loadGroup = groupId => dispatch => {
 
 
 export default (state=initialState, action) => {
-	const newState = Object.assign({}, state)
+	const newState = {...state}
 
 	switch(action.type) {
 
@@ -60,12 +73,6 @@ export default (state=initialState, action) => {
  		break
 
 	case UPDATE_INDIV:
-		// const likerCopy = Object.assign({}, action.liker)
-		// likerCopy[action.likee.name] = action.amount
-	 	// 	newState.selected = likerCopy
-
-	 //TODO: lodash replace
-	 	// console.log(action.indiv, '@@@')
 	 	const updatedIndiv = action.indiv
  		newState.selected = updatedIndiv
 

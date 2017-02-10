@@ -21,15 +21,16 @@ export const colorInterpolator = (preference) => {
 
 export const averageLikedByGroup = (individual, group) =>
     group.reduce((totalLiked, groupMember) => {
-        const likedByMember = groupMember[individual.name] || 0
+        const likedByMember = +groupMember[individual.name] || 0
         return totalLiked += likedByMember
-    }, 0) / group.length - 1
+    }, 0) / (group.length - 1)
 
 export const averageLikesGroup = (individual, group) =>
     group.reduce((totalLikes, groupMember) => {
-        const likesMember = individual[groupMember.name] || 0
+        const likesMember = +individual[groupMember.name] || 0
+        console.log(likesMember, totalLikes)
         return totalLikes += likesMember
-    }, 0) / group.length - 1
+    }, 0) / (group.length - 1)
 
 // PEAR utils
 

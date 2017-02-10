@@ -17,9 +17,9 @@ const Individual = db.define('individuals', {
 		setPreference: function (partner, pref){
 			return db.model('individualPartners').findOrCreate({where: 
 				{
-				individual_id: this.id,
-				partner_id: partner.id
-				}	
+					individual_id: this.id,
+					partner_id: partner.id
+				}
 			})
 			.spread((indivPart, created) => {
 				indivPart.preference = pref
