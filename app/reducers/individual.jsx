@@ -1,18 +1,12 @@
 import axios from 'axios'
 import { Individual, swap } from 'APP/app/utils'
 
-const initialState = { 
-	selected: {}, 
-	groupName: '', 
-	groupMembers: [] 
-	}
-
-// action
+// actions
 const SELECT_INDIV = 'SELECT_INDIV'
 const UPDATE_INDIV = 'UPDATE_INDIV'
 const RECEIVE_GROUP = 'RECEIVE_GROUP'
 
-// action-generator
+// action-generators
 export const selectIndiv = indiv => ({ type: SELECT_INDIV, indiv }) 
 
 export const updateIndiv = (indiv) => ({ type: UPDATE_INDIV, indiv })
@@ -21,7 +15,6 @@ export const updateIndiv = (indiv) => ({ type: UPDATE_INDIV, indiv })
 export const updatePreference = (liker, likee, amount) => {
 	axios.put('api/individual/', {liker, likee, amount})
 	const updatedLiker = {...liker}
-	console.log('indiv, =?', updatedLiker === liker)
 	updatedLiker[likee.name] = amount
 	return updateIndiv(updatedLiker)
 }
@@ -35,11 +28,6 @@ export const updatePreference = (liker, likee, amount) => {
 // 			dispatch(updateIndiv(formattedIndiv))
 // 		})
 // 	}
-		// {
-		// 	const formattedIndiv = new Individual(updatedIndiv)
-		// 	dispatch(updatePreference(formattedIndiv, likee, amount))
-		// })
-		// }
 
 export const receiveGroup = group => ({ type: RECEIVE_GROUP, group }) 
 
@@ -62,7 +50,12 @@ export const loadGroup = groupId => dispatch => {
 }
 
 
-
+const initialState = { 
+	selected: {}, 
+	groupName: '', 
+	groupMembers: [] 
+	}
+	
 export default (state=initialState, action) => {
 	const newState = {...state}
 

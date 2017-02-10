@@ -28,7 +28,6 @@ export const averageLikedByGroup = (individual, group) =>
 export const averageLikesGroup = (individual, group) =>
     group.reduce((totalLikes, groupMember) => {
         const likesMember = +individual[groupMember.name] || 0
-        console.log(likesMember, totalLikes)
         return totalLikes += likesMember
     }, 0) / (group.length - 1)
 
