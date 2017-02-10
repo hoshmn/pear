@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Individual } from 'APP/app/utils'
+import { Individual, swap } from 'APP/app/utils'
 
 const initialState = { 
 	selected: {}, 
@@ -33,13 +33,19 @@ export const receiveGroup = group => ({ type: RECEIVE_GROUP, group })
 export const loadAll = () => dispatch => {
 	axios.get('/api/group/')
 		.then(res => res.data)
-		.then(all => dispatch(receiveGroup({ title: 'ALL', members: all.map(indiv=>new Individual(indiv))})))
+		.then(all => dispatch(receiveGroup({ 
+			title: 'ALL', 
+			members: all.map(indiv=>new Individual(indiv))
+		})))
 }
 
 export const loadGroup = groupId => dispatch => {
 	axios.get(`/api/group/${groupId}`)
 		.then(res => res.data)
-		.then(members => dispatch(receiveGroup({ title: 'ALL', members: members.map(indiv=>new Individual(indiv))})))
+		.then(members => dispatch(receiveGroup({ 
+			title: 'group ' + groupId, 
+			members: members.map(indiv=>new Individual(indiv))
+		})))
 }
 
 
@@ -63,9 +69,7 @@ export default (state=initialState, action) => {
 	 	const updatedIndiv = action.indiv
  		newState.selected = updatedIndiv
 
- 		newState.groupMembers = newState.groupMembers.map(member =>
- 			updatedIndiv.id==member.id ? updatedIndiv : member)
- 		// console.log(members)
+		newState.groupMembers = swap(newState.groupMembers, updatedIndiv)
  		break
 
 	case RECEIVE_GROUP:

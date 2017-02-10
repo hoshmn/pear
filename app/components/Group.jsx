@@ -2,48 +2,6 @@ import React, { Component } from 'react';
 import Individual from './Individual';
 import SelectedIndividual from './SelectedIndividual';
 
-// const group = [
-//   {
-//     id: 1,
-//     name: 'Josh',
-//     Gil: 17,
-//     Aditya: 9,
-//     Rose: 8
-//   },{
-//     id: 2,
-//     name: 'Gil',
-//     Josh: 27,
-//     Aditya: 9,
-//     Rose: 8
-//   },{
-//     id: 3,
-//     name: 'Aditya',
-//     Gil: 7,
-//     Josh: 9,
-//     Rose: 8
-//   },{
-//     id: 4,
-//     name: 'Rose',
-//     Gil: 7,
-//     Aditya: 9,
-//     Josh: 8
-//   },{
-//     id: 5,
-//     name: 'Simon',
-//     Gil: 7,
-//     Aditya: 9,
-//     Josh: 8
-//   }
-// ];
-
-// const selected = {
-//     id: 1,
-//     name: 'Josh',
-//     Gil: 17,
-//     Aditya: 9,
-//     Rose: 8
-//   };
-
 
 export default ({selected, name, members, select, updatePreference}) => {
   // console.log(group)
@@ -59,16 +17,17 @@ export default ({selected, name, members, select, updatePreference}) => {
             // console.log(this.state.selected.name)
             return (selected === indiv)
               ? <SelectedIndividual
-                    indiv={indiv}
                     key={indiv.id}
+                    indiv={indiv}
+                    group={members}
                   />
 
               : <Individual 
+                    key={indiv.id}
                     select={select}
                     updatePreference={updatePreference}
                     indiv={indiv}
                     selected={selected} 
-                    key={indiv.id}
                   />
             })
         }
