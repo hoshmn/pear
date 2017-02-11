@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import Individual from './Individual';
 import SelectedIndividual from './SelectedIndividual';
 
 
-export default ({selected, name, members, select, updatePreference}) => {
-  // console.log(group)
+export default ({selected, name, members, groupId, select, updatePreference}) => {
+  console.log(groupId)
   return (
 
       <div>
@@ -32,6 +33,7 @@ export default ({selected, name, members, select, updatePreference}) => {
             })
         }
         </span>
+        <Link to={`/pair/${groupId}`} > PAIR! </Link>
       </div>
     
   )}

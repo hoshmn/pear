@@ -47,7 +47,7 @@ const compatability = (personA, personB) => {
 	return Apref + Bpref
 }
 
-const pear = (group, indiv = randomEl(group)) => {
+export const pear = (group, indiv = randomEl(group)) => {
 	const pairs = []
 
 	while (group.length){
