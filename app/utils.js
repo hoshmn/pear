@@ -41,27 +41,59 @@ const pluck = (group, indiv) =>
 export const swap = (group, indiv) => 
 	group.map(ind => ind.id===indiv.id ? indiv : ind)
 
-const compatability = (personA, personB) => {
-	const Apref = personA[personB.name] || 0
-	const Bpref = personB[personA.name] || 0
-	return Apref + Bpref
+//returns the average compatibility [-10,10] between all members of a team (array of any number of indivs)
+export const compatibility = team => {
+	// console.log(team)
+	if (!Array.isArray(team)) return 0
+	let numberOfPrefs = 0
+	const totalPrefs = team.reduce((accumPrefs,liker,i)=>{
+		return accumPrefs += team.reduce((accumLikerPrefs,likee,j)=>{
+			const like = liker[likee.name]
+			if (i!=j && like!=undefined){
+				accumLikerPrefs+=like
+				numberOfPrefs++
+			}
+			return accumLikerPrefs
+		},0)
+	},0)
+	return numberOfPrefs ? totalPrefs/numberOfPrefs : 0
 }
 
-export const pear = (group, indiv = randomEl(group)) => {
-	const pairs = []
+//find indiv an optimal team (array of members)
+const optimalTeamForIndiv = (teams, indiv) => {
+	if (teams.length === 1) return teams[0]
+	return teams.reduce( (bestMatch, next) => {
+		return (compatibility([indiv, ...next]) > compatibility([indiv, ...bestMatch]))
+		? next
+		: bestMatch
+	})
+}
+//find indiv an optimal partner 
+const optimalPartnerForIndiv = (members, indiv) => {
+	// console.log('@mem',members.map(m=>m.name))
+	if (members.length === 1) return members[0]
+	return members.reduce( (bestMatch, next) => {
+		return (compatibility([indiv, next]) > compatibility([indiv, bestMatch]))
+		? next
+		: bestMatch
+	})
+}
 
-	while (group.length){
+export const pear = group => {
+	const pairs = []
+	let indiv
+	while (group.length > 1){
+		indiv = randomEl(group)
 		group = pluck(group, indiv) //returns copy of group, without indiv
-		const partner = group.reduce( (bestMatch, next) => {
-			return (compatability(indiv, next) > compatability(indiv, bestMatch))
-			? next
-			: bestMatch
-		})
+		const partner = optimalPartnerForIndiv(group, indiv)
 		group = pluck(group, partner)
 		pairs.push([indiv,partner])
-		if (group.length === 1) pairs.push([group.pop()])
-		else indiv = randomEl(group)
 	}
-
+	//in the case that there is a remaining indiv and no one to pair with
+	if (group.length) {
+		const lastIndiv = group.pop()
+		const optimalTeam = optimalTeamForIndiv(pairs, lastIndiv)
+		optimalTeam.push(lastIndiv)
+	}
 	return pairs
 }

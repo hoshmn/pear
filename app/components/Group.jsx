@@ -5,7 +5,6 @@ import SelectedIndividual from './SelectedIndividual';
 
 
 export default ({selected, name, members, groupId, select, updatePreference}) => {
-  console.log(groupId)
   return (
 
       <div>
