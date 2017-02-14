@@ -15,7 +15,7 @@ export default ({selected, name, members, groupId, select, updatePreference}) =>
           members && members.map( indiv => {
             // console.log(indiv.name)
             // console.log(this.state.selected.name)
-            return (selected === indiv)
+            return (selected.id === indiv.id)
               ? <SelectedIndividual
                     key={indiv.id}
                     indiv={indiv}
