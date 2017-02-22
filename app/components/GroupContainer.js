@@ -8,7 +8,8 @@ import { selectIndiv, updatePreference } from '../reducers/individual'
 const mapStateToProps = (state, ownProps) => ({
 	name: state.indiv.groupName,
 	members: state.indiv.groupMembers,
-	selected: state.indiv.selected
+	selected: state.indiv.selected,
+	groupId: state.indiv.groupId
 })
 
 

@@ -9,7 +9,7 @@ const RECEIVE_GROUP = 'RECEIVE_GROUP'
 // action-generators
 export const selectIndiv = indiv => ({ type: SELECT_INDIV, indiv }) 
 
-export const updateIndiv = (indiv) => ({ type: UPDATE_INDIV, indiv })
+export const updateIndiv = indiv => ({ type: UPDATE_INDIV, indiv })
 
 //optimistic loading
 export const updatePreference = (liker, likee, amount) => {
@@ -36,7 +36,8 @@ export const loadAll = () => dispatch => {
 		.then(res => res.data)
 		.then(all => dispatch(receiveGroup({ 
 			title: 'ALL', 
-			members: all.map(indiv=>new Individual(indiv))
+			members: all.map(indiv=>new Individual(indiv)),
+			id: 0
 		})))
 }
 
@@ -45,7 +46,8 @@ export const loadGroup = groupId => dispatch => {
 		.then(res => res.data)
 		.then(members => dispatch(receiveGroup({ 
 			title: 'group ' + groupId, 
-			members: members.map(indiv=>new Individual(indiv))
+			members: members.map(indiv=>new Individual(indiv)),
+			id: groupId
 		})))
 }
 
@@ -53,7 +55,8 @@ export const loadGroup = groupId => dispatch => {
 const initialState = { 
 	selected: {}, 
 	groupName: '', 
-	groupMembers: [] 
+	groupMembers: [],
+	groupId: 0
 	}
 	
 export default (state=initialState, action) => {
@@ -73,6 +76,7 @@ export default (state=initialState, action) => {
  		break
 
 	case RECEIVE_GROUP:
+		newState.groupId = action.group.id
 	  	newState.groupName = action.group.title
 	  	newState.groupMembers = action.group.members
 	 	break

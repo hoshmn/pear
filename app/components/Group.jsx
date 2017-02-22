@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 import Individual from './Individual';
 import SelectedIndividual from './SelectedIndividual';
 
 
-export default ({selected, name, members, select, updatePreference}) => {
-  // console.log(group)
+export default ({selected, name, members, groupId, select, updatePreference}) => {
   return (
 
       <div>
@@ -15,7 +15,7 @@ export default ({selected, name, members, select, updatePreference}) => {
           members && members.map( indiv => {
             // console.log(indiv.name)
             // console.log(this.state.selected.name)
-            return (selected === indiv)
+            return (selected.id === indiv.id)
               ? <SelectedIndividual
                     key={indiv.id}
                     indiv={indiv}
@@ -32,6 +32,7 @@ export default ({selected, name, members, select, updatePreference}) => {
             })
         }
         </span>
+        <Link to={`/pair/${groupId}`} > PAIR! </Link>
       </div>
     
   )}
