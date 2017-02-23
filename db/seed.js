@@ -37,8 +37,8 @@ const seedPreferences = () => db.Promise.map(ids, indivId =>
 
 
 const seedGroups = () => db.Promise.map([
-  {name: 'FS1607'},
-], user => db.model('users').create(user))
+  {name: 'FS1607'},{name: 'FS1610'},{name: 'instructors'}
+], group => db.model('groups').create(group))
 
 db.didSync
   .then(() => db.sync({force: true}))

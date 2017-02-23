@@ -32,7 +32,7 @@ export const updatePreference = (liker, likee, amount) => {
 export const receiveGroup = group => ({ type: RECEIVE_GROUP, group }) 
 
 export const loadAll = () => dispatch => {
-	axios.get('/api/group/')
+	axios.get('/api/individual/')
 		.then(res => res.data)
 		.then(all => dispatch(receiveGroup({ 
 			title: 'ALL', 
