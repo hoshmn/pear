@@ -44,11 +44,15 @@ export const loadAll = () => dispatch => {
 export const loadGroup = groupId => dispatch => {
 	axios.get(`/api/group/${groupId}`)
 		.then(res => res.data)
-		.then(members => dispatch(receiveGroup({ 
-			title: 'group ' + groupId, 
-			members: members.map(indiv=>new Individual(indiv)),
-			id: groupId
-		})))
+		.then(group => {
+			const members = group && group.individuals || []
+
+			dispatch(receiveGroup({ 
+					title: 'group ' + groupId, 
+					members: members.map(indiv=>new Individual(indiv)),
+					id: groupId
+				}))
+		})
 }
 
 
@@ -76,6 +80,7 @@ export default (state=initialState, action) => {
  		break
 
 	case RECEIVE_GROUP:
+		console.log('reduce group', action.group)
 		newState.groupId = action.group.id
 	  	newState.groupName = action.group.title
 	  	newState.groupMembers = action.group.members

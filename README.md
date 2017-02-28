@@ -7,10 +7,13 @@ implemented using with React/Redux, Node, Express, and Sequelize
 
 
 DEBUG:
--WHY DON'T INDIVIDUAL'S RERENDER IMMEDIATELY AFTER UPDATED PREF?? wait until next change...
+-disappeared primary pear image
 
 TODO:
--add _lodash
--make scope default?
--groups
--add individual
+-group name
+-add groups, individuals
+-add link home from groups (nav?)
+<!-- -add _lodash -->
+<!-- -make scope default? -->
+<!-- -groups -->
+<!-- -add individual -->
