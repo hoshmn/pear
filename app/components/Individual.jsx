@@ -6,7 +6,7 @@ const Individual = ({indiv, selected, select, updatePreference}) => {
   const likesSelected = indiv[selected.name] || 0
   const compatabilityColor = colorInterpolator(likedBySelected)
 
-  // console.log('!!!!!', indiv.name, likedBySelected)
+
   return(
       <span className="pear">
       <img src="/pear_ind.png" style={{backgroundColor:compatabilityColor}} onClick={()=>select(indiv)} />

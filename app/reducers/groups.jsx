@@ -18,7 +18,6 @@ export default (state=initialState, action) => {
   	switch(action.type) {
 
 	  	case RECEIVE_GROUPS:
-	  		console.log('reduce', action.groups)
 	  		newState.groups = action.groups
 	 		break
 

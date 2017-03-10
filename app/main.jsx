@@ -14,12 +14,10 @@ import { loadGroups } from './reducers/groups'
 
 const loadGroupMembers = (nextState) => {
 	const groupId = nextState.params.groupId
-	console.log('hi',groupId);
 	store.dispatch(loadGroup(groupId))
 }
 
 const loadAllGroups = (nextState) => {
-	console.log('load groups')
 	store.dispatch(loadGroups())
 }
 
