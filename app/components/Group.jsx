@@ -13,8 +13,7 @@ export default ({selected, name, members, groupId, select, updatePreference}) =>
         <span className="flexbox-container" >
         {  //create PEAR component
           members && members.map( indiv => {
-            // console.log(indiv.name)
-            // console.log(this.state.selected.name)
+
             return (selected.id === indiv.id)
               ? <SelectedIndividual
                     key={indiv.id}
@@ -33,21 +32,10 @@ export default ({selected, name, members, groupId, select, updatePreference}) =>
         }
         </span>
         <Link to={`/pair/${groupId}`} > PAIR! </Link>
+        <br></br>
+        <Link to="/">Go Home</Link>
       </div>
     
   )}
 
-  // constructor(props) {
-  //   // this.props.group = group;
-  //   super(props);
 
-  //   // this.state = {selected};
-  // }
-
-  // render() {
-  //   // if (!this.state) { return null }
-  //   const group = this.props.group
-  //   const selected = this.props.selected
-  //   console.log(group, selected)
-  //   // const {joke, answered} = this.state    
-  //   return (

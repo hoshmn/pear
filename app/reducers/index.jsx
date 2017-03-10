@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import groupReducer from './group'
+import groupsReducer from './groups'
 import indivReducer from './individual'
 
 const rootReducer = combineReducers({
-  group: groupReducer,
+  groups: groupsReducer,
   indiv: indivReducer
 })
 

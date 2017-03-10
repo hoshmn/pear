@@ -5,16 +5,17 @@
 // to get access to the User model.
 
 const User = require('./user')
-const IndivdualPartner = require('./individualPartner')
+const IndividualPartner = require('./individualPartner')
 const Individual = require('./individual')
+
 const Group = require('./group')
 
 Individual.belongsToMany(Individual, { 
 	as: 'partner',
-	through: 'individualPartners'
+	through: IndividualPartner
 	 })
 
-// Individual.belongsToMany(Group, )
-Group.hasMany(Individual)
+Group.belongsToMany(Individual, {through: 'individualGroups'})
+Individual.belongsToMany(Group, {through: 'individualGroups'})
 
-module.exports = {Group, Individual, IndivdualPartner}
+module.exports = {Group, Individual, IndividualPartner}

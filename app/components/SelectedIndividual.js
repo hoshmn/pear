@@ -6,7 +6,7 @@ const SelectedIndividual = ({indiv, group}) => {
 	const compatabilityColor = colorInterpolator(averagePreference)
   	return(
 	  	<span className="pear">
-	    	<img src="pear_selected.png" style={{backgroundColor:compatabilityColor}} />
+	    	<img src="/pear_selected.png" style={{backgroundColor:compatabilityColor}} />
 	    	<h1 className="indiv-info"> { indiv.name.toUpperCase() } </h1>
 	  	</span>
 )}

@@ -13,7 +13,7 @@ export const updateIndiv = indiv => ({ type: UPDATE_INDIV, indiv })
 
 //optimistic loading
 export const updatePreference = (liker, likee, amount) => {
-	axios.put('api/individual/', {liker, likee, amount})
+	axios.put('/api/individual/', {liker, likee, amount})
 	const updatedLiker = {...liker}
 	updatedLiker[likee.name] = amount
 	return updateIndiv(updatedLiker)
@@ -32,7 +32,7 @@ export const updatePreference = (liker, likee, amount) => {
 export const receiveGroup = group => ({ type: RECEIVE_GROUP, group }) 
 
 export const loadAll = () => dispatch => {
-	axios.get('/api/group/')
+	axios.get('/api/individual/')
 		.then(res => res.data)
 		.then(all => dispatch(receiveGroup({ 
 			title: 'ALL', 
@@ -44,11 +44,14 @@ export const loadAll = () => dispatch => {
 export const loadGroup = groupId => dispatch => {
 	axios.get(`/api/group/${groupId}`)
 		.then(res => res.data)
-		.then(members => dispatch(receiveGroup({ 
-			title: 'group ' + groupId, 
-			members: members.map(indiv=>new Individual(indiv)),
-			id: groupId
-		})))
+		.then(group => {
+			const members = group && group.individuals || []
+			dispatch(receiveGroup({ 
+					title: group.name, 
+					members: members.map(indiv=>new Individual(indiv)),
+					id: groupId
+				}))
+		})
 }
 
 
